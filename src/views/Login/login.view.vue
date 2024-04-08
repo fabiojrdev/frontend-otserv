@@ -107,7 +107,7 @@
           </div>
           <div class="mt-2">
             <input
-              id="password"
+              id="registerpassword"
               name="password"
               type="password"
               autocomplete="current-password"
@@ -126,8 +126,8 @@
           </div>
           <div class="mt-2">
             <input
-              id="password"
-              name="password"
+              id="repasswordregister"
+              name="repassword"
               type="password"
               autocomplete="current-password"
               required
@@ -201,7 +201,7 @@ export default {
         email: this.emailRegister,
         password: this.passRegister
       }
-      if (!this.accountCreated) {
+      if (this.accountCreated) {
         return
       }
       if (!this.nameRegister) {
