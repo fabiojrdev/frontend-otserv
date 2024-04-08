@@ -1,5 +1,8 @@
 <template>
-  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div v-if="loggedUser">
+    <NavbarDashboard :AccountData="accountData" />
+  </div>
+  <div v-if="!loggedUser" class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img
         class="mx-auto h-10 w-auto"
@@ -75,16 +78,21 @@
 </template>
 <script lang="ts">
 import Api from '@/api/Api'
+import NavbarDashboard from './NavbarDashboard.vue'
 
 export default {
   name: 'LoginView',
+  components: {
+    NavbarDashboard
+  },
 
   data() {
     return {
       loginInput: '',
       passInput: '',
       loggedUser: false,
-      stayLoggedin: 'false'
+      stayLoggedin: 'false',
+      accountData: {}
     }
   },
 
@@ -105,7 +113,7 @@ export default {
       try {
         const response = await Api.post('/auth/', AccountConfigs)
         this.loggedUser = true
-        console.log('Login success:', response)
+        this.accountData = response.data
       } catch (error) {
         this.loggedUser = false
         console.error('Login failed', error)
