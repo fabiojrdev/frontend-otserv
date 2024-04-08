@@ -12,6 +12,8 @@
     }
   ],
   "compilerOptions": {
-    "module": "NodeNext"
+    "baseUrl": "./src",
+    "module": "NodeNext",
+    "types": ["node"]
   }
 }

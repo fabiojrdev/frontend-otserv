@@ -61,6 +61,7 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
+  background-image: src('background-login.jpg');
   /* background: var(--color-background); */
   transition:
     color 0.5s,
