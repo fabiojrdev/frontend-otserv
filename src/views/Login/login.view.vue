@@ -227,6 +227,7 @@ export default {
         const response = await Api.post('/register/', AccountConfigs)
         this.accountData = response.data
         this.accountCreated = true
+        this.typeForm = 'login'
       } catch (error) {
         this.loggedUser = false
         console.error('Register failed', error)
