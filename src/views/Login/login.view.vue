@@ -9,7 +9,7 @@
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
         Entre com sua conta
       </h2>
-      <!-- <h2 v-if="loggedUser">Logado com sucesso</h2> -->
+      <h2 v-if="loggedUser">Logado com sucesso</h2>
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -101,14 +101,11 @@ export default {
       }
     },
     async validateLogin() {
-      let AccountConfigs = { name: `${this.loginInput}`, password: `${this.passInput}` }
+      let AccountConfigs = { name: this.loginInput, password: this.passInput }
       try {
-        const response = await Api.post('/auth/', {
-          AccountLoginDto: AccountConfigs,
-          stayLoggedinQuery: this.stayLoggedin
-        })
+        const response = await Api.post('/auth/', AccountConfigs)
         this.loggedUser = true
-        console.log('Login success:', response.data)
+        console.log('Login success:', response)
       } catch (error) {
         this.loggedUser = false
         console.error('Login failed', error)
