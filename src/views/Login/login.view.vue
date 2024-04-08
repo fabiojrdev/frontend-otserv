@@ -9,16 +9,15 @@
         src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Tibia-logo.png"
         alt="Logo"
       />
-      <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      <!-- <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">
         Entre com sua conta
-      </h2>
-      <h2 v-if="loggedUser">Logado com sucesso</h2>
+      </h2> -->
     </div>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm card-login">
       <form class="space-y-6" @submit.prevent="validateLogin">
         <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
+          <label for="email" class="block text-sm font-medium leading-6 text-white-900">
             E-mail ou Nome
           </label>
           <div class="mt-2">
@@ -27,7 +26,7 @@
               name="email"
               type="text"
               required
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              class="input-login"
               @change="loadInput($event, 'login')"
             />
           </div>
@@ -35,13 +34,11 @@
 
         <div>
           <div class="flex items-center justify-between">
-            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
+            <label for="password" class="block text-sm font-medium leading-6 text-white-900">
               Senha
             </label>
             <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">
-                Esqueceu sua senha?
-              </a>
+              <a href="#" class="text-white-900"> Esqueceu sua senha? </a>
             </div>
           </div>
           <div class="mt-2">
@@ -51,27 +48,21 @@
               type="password"
               autocomplete="current-password"
               required
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              class="input-login"
               @change="loadInput($event, 'pass')"
             />
           </div>
         </div>
 
         <div>
-          <button
-            type="submit"
-            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Entrar
-          </button>
+          <h2 v-if="loggedUser">Logado com sucesso</h2>
+          <button type="submit" class="button-login">Entrar</button>
         </div>
       </form>
 
-      <p class="mt-10 text-center text-sm text-gray-500">
+      <p class="mt-10 text-center text-sm text-white-500">
         Não tem conta?
-        <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-          Crie aqui sua conta
-        </a>
+        <a href="#" class="link"> Crie aqui sua conta </a>
       </p>
     </div>
   </div>
@@ -97,10 +88,6 @@ export default {
   },
 
   methods: {
-    testeFunction() {
-      console.log('sinceridade')
-      return 'sinceridade'
-    },
     loadInput(event: any, type: any) {
       if (type === 'login') {
         this.loginInput = event.target.value
@@ -122,3 +109,44 @@ export default {
   }
 }
 </script>
+
+<style>
+.card-login {
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  background-color: rgba(56, 56, 56, 0.8);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  color: white;
+  border: 2px solid rgba(80, 80, 80, 0.7);
+}
+.input-login {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  color: rgb(165, 165, 165);
+  background: rgba(0, 0, 0, 1);
+  padding: 5px;
+}
+.button-login {
+  justify-content: center;
+  align-content: center;
+  font-size: 14px;
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  background: rgb(255, 198, 42);
+  padding: 5px;
+}
+.button-login:hover {
+  background: rgb(251, 201, 61);
+}
+.link {
+  font-size: 12px;
+  color: rgb(255, 198, 42);
+}
+.link:hover {
+  color: rgb(251, 201, 61);
+}
+</style>

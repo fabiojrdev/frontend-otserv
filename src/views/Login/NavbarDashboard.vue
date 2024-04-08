@@ -4,8 +4,11 @@
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
     aria-label="Sidebar"
   >
-    <h2 style="font-size: 18px">{{ getAccountData('name') }}</h2>
-    <h6 style="font-size: 10px">{{ getAccountData('email') }}</h6>
+    <div v-if="accountInfo">
+      <h2 style="font-size: 18px">{{ accountInfo.name }}</h2>
+      <h6 style="font-size: 12px">{{ accountInfo.email }}</h6>
+    </div>
+
     <br />
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
       <ul class="space-y-2 font-medium">
@@ -36,6 +39,13 @@
   </aside>
 </template>
 <script lang="ts">
+interface AccountInfo {
+  name: string
+  email: string
+  coins: string
+  premdays: string
+}
+
 export default {
   name: 'NavbarDashboard',
   props: {
@@ -44,14 +54,25 @@ export default {
 
   data() {
     return {
-      accountInfo: {}
+      accountInfo: null as AccountInfo | null
     }
   },
 
+  created() {
+    this.extractAccountData()
+  },
+
   methods: {
-    getAccountData(value?: string) {
-      if (value) {
-        return 'feliz'
+    extractAccountData() {
+      if (this.$props.AccountData) {
+        const { name, email, coins, premdays } = this.$props.AccountData
+
+        this.accountInfo = {
+          name: String(name),
+          email: String(email),
+          coins: String(coins),
+          premdays: String(premdays)
+        }
       }
     }
   }
