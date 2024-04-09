@@ -1,6 +1,6 @@
 <template>
   <div v-if="loggedUser">
-    <NavbarDashboard @updateInfo="handleUpdateInfo" :AccountData="accountData" />
+    <Dashboard @updateInfo="handleUpdateInfo" :AccountData="accountData" />
   </div>
   <div v-if="!loggedUser" class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -154,12 +154,14 @@
 </template>
 <script lang="ts">
 import Api from '@/api/Api'
-import NavbarDashboard from './NavbarDashboard.vue'
+import { defineComponent } from 'vue'
+import Dashboard from '../dashboard.vue'
 
-export default {
+export default defineComponent({
   name: 'LoginView',
+
   components: {
-    NavbarDashboard
+    Dashboard
   },
 
   data() {
@@ -238,7 +240,7 @@ export default {
       try {
         const response = await Api.post('/auth/', AccountConfigs)
         this.loggedUser = true
-        this.accountData = response.data
+        return localStorage.setItem('dataAccount', response.data )
       } catch (error) {
         this.loggedUser = false
         console.error('Login failed', error)
@@ -248,7 +250,7 @@ export default {
       this.loggedUser = newValue
     }
   }
-}
+})
 </script>
 
 <style>
